@@ -1,4 +1,4 @@
-package com.jason.mycors.entity;
+package com.jason.mycors.entity.vo;
 
 import lombok.Data;
 

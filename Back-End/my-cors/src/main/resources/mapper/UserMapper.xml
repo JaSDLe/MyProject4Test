@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jason.mycors.mapper.UserMapper">
 
-    <select id="findAllUsers" resultType="com.jason.mycors.entity.User">
+    <select id="findAllUsers" resultType="com.jason.mycors.entity.vo.User">
         SELECT * FROM user
     </select>
 
