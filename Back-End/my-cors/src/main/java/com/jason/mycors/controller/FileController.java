@@ -2,6 +2,7 @@ package com.jason.mycors.controller;
 
 import com.jason.mycors.entity.RespBean;
 import com.jason.mycors.util.CommonUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -13,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.nio.file.Paths;
 
+@Slf4j
 @RestController
 public class FileController {
 
@@ -24,7 +26,7 @@ public class FileController {
     }
 
     @CrossOrigin(origins = "*")
-    @RequestMapping(value = "/upload", method = RequestMethod.POST)
+    @PostMapping(value = "/upload")
     public RespBean upload(@RequestParam("file") MultipartFile[] files) {
         if (files == null || files.length == 0) {
             return RespBean.error("files are null");
@@ -57,7 +59,8 @@ public class FileController {
                 fileUpload.transferTo(newFile);
 //                return RespBean.ok("success to upload");
             } catch (Exception e) {
-                e.printStackTrace();
+//                e.printStackTrace();
+                log.info("Exception:{}",e);
                 return RespBean.error("fail to upload");
             }
         }
@@ -84,4 +87,23 @@ public class FileController {
                 .contentType(MediaType.parseMediaType("application/octet-stream"))
                 .body(resource);
     }
+	
+//  	response.setCharacterEncoding("UTF-8");
+//  	response.setHeader("content-type", "application/octet-stream;charset=utf-8");// application/vnd.ms-excel
+//  	response.setContentType("application/octet-stream;charset=utf-8");// application/vnd.ms-excel
+//  	response.setHeader("Content-Disposition", "attachment;fileName=" + URLEncoder.encode("报表" + System.currentTimeMillis() + ".xls", "UTF-8"));
+//  	try {
+//  		OutputStream outputStream = response.getOutputStream();// itemResult.getData()  itemResult.getData()
+//  		InputStream inputStream = new ByteArrayInputStream(mybuffer);
+//  		byte[] buff = new byte[1024];
+//  		int num = inputStream.read(buff);
+//  		while (num != -1) {
+//  			System.out.println("buff -->  " + Arrays.toString(buff));
+//  			outputStream.write(buff, 0, num);
+//  			outputStream.flush();
+//  			num = inputStream.read(buff);
+//  		}
+//  	} catch (Exception e) {
+//  		e.printStackTrace();
+//  	}
 }

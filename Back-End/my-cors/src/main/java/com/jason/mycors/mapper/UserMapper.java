@@ -9,5 +9,6 @@ import java.util.List;
 @Mapper
 @Repository
 public interface UserMapper {
+
     List<User> findAllUsers();
 }

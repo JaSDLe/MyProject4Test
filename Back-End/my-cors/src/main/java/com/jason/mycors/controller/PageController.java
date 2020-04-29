@@ -6,10 +6,7 @@ import com.jason.mycors.entity.dto.QueryPageDTO;
 import com.jason.mycors.entity.vo.User;
 import com.jason.mycors.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class PageController {
@@ -17,19 +14,15 @@ public class PageController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/page", method = RequestMethod.GET)
+    @PostMapping(value = "/page")
     public PageInfo<User> page(QueryPageDTO dto) {
-        System.out.println(dto.getPageNum());
-        System.out.println(dto.getPageSize());
         PageHelper.startPage(dto.getPageNum(), dto.getPageSize());
         return new PageInfo<>(userService.findAllUsers());
     }
 
     @CrossOrigin(origins = "*")
-    @RequestMapping(value = "/pagec", method = RequestMethod.GET)
+    @PostMapping(value = "/pagec")
     public PageInfo<User> pagec(QueryPageDTO dto) {
-        System.out.println(dto.getPageNum());
-        System.out.println(dto.getPageSize());
         PageHelper.startPage(dto.getPageNum(), dto.getPageSize());
         return new PageInfo<>(userService.findAllUsers());
     }
